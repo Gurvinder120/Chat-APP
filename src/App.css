@@ -1,0 +1,119 @@
+* {
+  font-family: sans-serif;
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main {
+  display: block;
+  margin: auto;
+  width: 80%;
+}
+
+.chat{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+h1 {
+  font-size: 3.2rem;
+}
+
+.chats {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 1rem;
+  padding-bottom: 5rem;
+}
+
+.chats .me {
+  align-self: last baseline;
+}
+
+.chatbubble {
+  max-width: 320px;
+  width: max-content;
+  background: #242424;
+  padding:2rem  5rem;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  gap: 1rem;
+}
+
+p {
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+}
+
+
+.sendchat {
+  width: 100%;
+  padding: 0rem 2rem;
+  display: flex;
+  gap: 2rem;
+  position: fixed;
+  height: 8rem;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  background: white;
+}
+
+.sendchat input {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid black;
+  outline: none;
+  font-size: 1.6rem;
+  padding: 2rem;
+  height: 5rem;
+}
+
+.sendchat button {
+  border-radius: 6px;
+  height: 5rem;
+  border: none;
+  width: 15rem;
+  background: #dadada;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.sendchat button:hover {
+  background: #242424;
+  color: white;
+  transition: .2s;
+}
+
+.name {
+  font-size: 1.2rem;
+}
+
+.name-input{
+  width: 100%;
+  
+}
+
+.name-input input {
+  width: 50%;
+  font-size: 1.8rem;
+  border: 1px solid black;
+  outline: none;
+  padding: 2rem;
+  border-radius: 6px;
+  margin-top: 2rem;
+  height: 5rem;
+}
