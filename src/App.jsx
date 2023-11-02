@@ -1,25 +1,28 @@
-import { useState } from 'react'
+import { getDatabase, ref, push, onChildAdded } from "firebase/database";
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [user, setUser] = useState("")
-  const [chats, setChats] = useState([
-    { name: 'dummy', message: 'sdsd' },
-    { name: 'blahh', message: 'sdsd' },
-  ])
-  const [msg, setMsg] = useState("")
+  const db = getDatabase();
+  const chatsListRef = ref(db, 'chats');
 
-  const [name, setName] = useState('')
+  const [user, setUser] = useState("");
+  const [chats, setChats] = useState([]);
+  const [msg, setMsg] = useState("");
+  const [name, setName] = useState('');
 
   const sendChat = () => {
     if (msg.trim() === '') {
-      return; // Don't send empty messages
+      return;
     }
-    const c = [...chats];
-    c.push({ name: user, message: msg });
-    setChats(c);
-    setMsg(""); // Clear the input field after sending the message
-  }
+
+    push(chatsListRef, {
+      name,
+      message: msg
+    });
+
+    setMsg('');
+  };
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -27,15 +30,27 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    // Use onChildAdded to listen for new child items in the chatsListRef
+    const unsubscribe = onChildAdded(chatsListRef, (snapshot) => {
+      const chatData = snapshot.val();
+      setChats(chats => [...chats, chatData]);
+    });
+
+    // Return a cleanup function to unsubscribe when the component unmounts
+    return () => {
+      unsubscribe();
+    };
+  }, []); // Add an empty dependency array to run the effect only once when the component mounts
 
   return (
     <div className="main">
-      {name?null:
-      <div className="name-input">
-        <input type="text" placeholder='Enter UserName' onBlur={e=>setName(e.target.value)} />
-      </div>
+      {name ? null :
+        <div className="name-input">
+          <input type="text" placeholder='Enter UserName' onBlur={e => setName(e.target.value)} />
+        </div>
       }
-      {name? <div className='chat'>
+      {name ? <div className='chat'>
         <h1>USER: {name}</h1>
         <div className="chats">
           {chats.map((c, index) => (
@@ -55,9 +70,9 @@ function App() {
           />
           <button onClick={sendChat}>Send</button>
         </div>
-      </div>:null}
+      </div> : null}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
