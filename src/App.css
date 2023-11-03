@@ -117,3 +117,25 @@ p {
   margin-top: 2rem;
   height: 5rem;
 }
+
+.login-btn {
+  width: 25rem;
+  border: none;
+  color: white;
+  height: 7rem;
+  background: #242424;
+  font-size: 2rem;
+  border-radius: 6px;
+  border: 1px solid #242424;
+  cursor: pointer;
+  transition: .2s;
+  transform: translate(35vw, 50vh);
+}
+
+
+.login-btn:hover {
+  transition: .2s;
+  color: #242424;
+  background: white;
+  border: 1px solid #242424;
+}
